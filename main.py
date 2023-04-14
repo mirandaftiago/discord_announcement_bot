@@ -1,7 +1,7 @@
 import discord
 
 # Replace <YOUR_TOKEN_HERE> with your bot token
-TOKEN = 'MTA5NjA5ODMxODQ0ODMzMjk4Mw.GfWPDS.0j7ALevX3-LCQURWXYf9foOHjxpUYMGE09aO2w'
+TOKEN = 'MTA5NjA5ODMxODQ0ODMzMjk4Mw.GmVpPv.fS8gI87YB2xZacy5DK788RVvsj1WaU0tS53uWM'
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -21,26 +21,27 @@ async def on_message(message):
         member_names = [member.name for member in members]
         await message.channel.send(f'Members in this server: {", ".join(member_names)}')
 
+@client.event
+async def on_message(message):
+    if message.content.startswith('!list_members'):
+        # Code to list all members in the server
+        pass
+
     elif message.content.startswith('!send_to_role'):
-        role_name = message.content.split()[1]
-        print(role_name)
+        # Split the message into its parameters
+        params = message.content.split()[1:]
+        role_name = params[0]
+        custom_message = ' '.join(params[1:])
+
+        # Find the role and its members
         role = discord.utils.get(message.guild.roles, name=role_name)
-        print(role)
         if role is not None:
             members = role.members
-            member_names = [member.name for member in members]
-            response = f'Members with the {role_name} role: {", ".join(member_names)}'
-            await message.channel.send(response)
-
-            offline_members = [member for member in role.members if member.status == discord.Status.offline]
-            print(offline_members)
-            responseOffline = f"Members with the '{role_name}' role who are offline: {', '.join([member.name for member in offline_members])}"
-            await message.channel.send(responseOffline)
 
             # send message to all members with the specified role
             for member in members:
                 try:
-                    await member.send("Hello from the bot!")
+                    await member.send(custom_message)
                 except discord.Forbidden:
                     # Handle the case where the bot doesn't have permission to DM the member
                     pass
