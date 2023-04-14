@@ -1,7 +1,7 @@
 import discord
 
 # Replace <YOUR_TOKEN_HERE> with your bot token
-TOKEN = 'MTA5NjA5ODMxODQ0ODMzMjk4Mw.GmVpPv.fS8gI87YB2xZacy5DK788RVvsj1WaU0tS53uWM'
+TOKEN = ''
 
 intents = discord.Intents.default()
 intents.message_content = True
