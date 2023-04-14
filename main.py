@@ -1,7 +1,10 @@
 import discord
+import os
+from dotenv import load_dotenv
 
-# Replace <YOUR_TOKEN_HERE> with your bot token
-TOKEN = ''
+# Load the Discord bot token from the .env file
+load_dotenv()
+TOKEN = os.getenv('TOKEN')
 
 intents = discord.Intents.default()
 intents.message_content = True
