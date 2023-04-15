@@ -24,12 +24,6 @@ async def on_message(message):
         member_names = [member.name for member in members]
         await message.channel.send(f'Members in this server: {", ".join(member_names)}')
 
-@client.event
-async def on_message(message):
-    if message.content.startswith('!list_members'):
-        # Code to list all members in the server
-        pass
-
     elif message.content.startswith('!send_to_role'):
         # Split the message into its parameters
         params = message.content.split()[1:]
